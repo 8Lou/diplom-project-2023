@@ -28,6 +28,11 @@ class Api {
       // authorization: `Bearer ${localStorage.getItem("postApi")}`,
     }).then(onResponse);
   }
+  getPaginate(page, number, query = '') {
+        return fetch(`${this.baseUrl}/posts/paginate?page=${page}&limit=${number}&query=${query}`, {
+            headers: this.headers,
+        }).then(onResponse)
+    }
   addLike(postId) {
     return fetch(`${this.baseUrl}/posts/likes/${postId}`, {
       headers: this.headers,
@@ -42,10 +47,10 @@ class Api {
       // authorization: `Bearer ${localStorage.getItem("postApi")}`,
     }).then(onResponse);
   }
-  changePostLike(postId, isLiked) {
+  changePostLike(postId, isLike) {
     return fetch(`${this.baseUrl}/posts/likes/${postId}`, {
       headers: this.headers,
-      method: isLiked ? "DELETE" : "PUT",
+      method: isLike ? "DELETE" : "PUT",
       // authorization: `Bearer ${localStorage.getItem("postApi")}`,
     }).then(onResponse);
   }
@@ -72,7 +77,7 @@ class Api {
       // authorization: `Bearer ${localStorage.getItem("postApi")}`,
     }).then(onResponse);
   }
-  getPostsComments(postId) {
+  getPostComments(postId) {
     return fetch(`${this.baseUrl}/posts/comments/${postId}`, {
       method: "GET",
       headers: this.headers,
@@ -87,7 +92,7 @@ class Api {
       // authorization: `Bearer ${localStorage.getItem("postApi")}`,
     }).then(onResponse);
   }
-  deleteComment(postId, commentId) {
+  deleteComments(commentId, postId) {
     return fetch(`${this.baseUrl}/posts/comments/${postId}/${commentId}`, {
       method: "DELETE",
       headers: this.headers,

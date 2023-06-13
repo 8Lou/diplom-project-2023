@@ -20,10 +20,13 @@ function App() {
   const [autorozation, SetAutorization] = useState(false); // Стейт авторизации
   const [authErr, setAuthErr] = useState(''); // стейт ошибок авторизации
   const themeValue = { theme, setTheme };
+  const [postCount, setPostCount] = useState([]); //  состояние количества постов
+  const [pageNum, setPageNum] = useState(1); // состояние пагинации
+  const quantity = 12; //кол-во постов на стр.
 
   const handlePostLike = async (post, wasLiked) => {
     const updatedPost = await api.changePostLike(post._id, wasLiked);
-    const index = post.findIndex((e) => e._id === updatedPost?._id);
+    const index = posts.findIndex((e) => e._id === updatedPost?._id);
     if (index !== -1) {
       setPosts((state) => [
         ...state.slice(0, index),
@@ -36,6 +39,7 @@ function App() {
       : setFavorites((state) => [updatedPost, ...state]);
   };
 
+  ///////////////////////////// фильтрация по токену //////////////////////////
   /* const filteredPost = (post) => {
     return post.filter(
       (e) =>
@@ -64,6 +68,7 @@ function App() {
     }
   };
 
+
   function updatePostState(likedPost) {
     let updatedPost = posts.map((el) => {
       return el._id !== likedPost._id ? el : likedPost;
@@ -83,8 +88,29 @@ function App() {
   useEffect(() => {
     if (autorozation) {
       api.getUserInfo().then((data) => setUser(data));
+    } if (autorozation) {
+      paginate(1);
     }
   }, [autorozation]);
+
+
+  let pagePostCount = Math.ceil(postCount / 12); // Количество страниц пагинации
+
+  function paginate(currentPage = 1, search = "") {
+    let postQuantity = quantity; // переменная определяющая количество постов на странице
+    api
+      .getPaginate(currentPage, postQuantity)
+      .then(
+        (
+          data // апи запрос на получение постов с сервера.
+        ) => {
+          setPosts(data.posts);
+          setPostCount(data.total);
+          setPageNum(currentPage);
+        }
+      )
+      .catch((err) => console.log("ошибка при запросе постов:", err.message));
+  }
 
   useEffect(() => {
     api.getAllPosts().then((data) => setPosts(data));
@@ -101,7 +127,7 @@ function App() {
     deletePost,
     addNewPostInState,
     handleLike: handlePostLike,
-    posts: posts,
+    posts,
     setPosts,
     favorites,
     onSort,
@@ -156,7 +182,7 @@ function App() {
   //////////////////Oбновлениe стейта постов, после добавления нового поста ///////////////
 
   function addNewPostInState(newPost) {
-    let updatedPost = [newPost, ...posts];
+    let updatedPost = [...posts, newPost];
     setPosts(updatedPost);
   }
 
@@ -188,7 +214,9 @@ function App() {
                 <Routes>
                   <Route
                     index
-                    element={<PostList onSort={onSort} posts={posts} />}
+                    element={<PostList onSort={onSort} posts={posts} pagePostCount={pagePostCount}
+                      pageNum={pageNum}
+                      paginate={paginate} />}
                   />
                   {/* <Route path="/post/:postId" element={<PostPage />} /> */}
                   <Route path="/post/:id" element={<PostPage />} />
