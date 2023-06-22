@@ -45,8 +45,12 @@ const App = () => {
       setPostData([...newPost]);
       return;
     }
-    if (sortId === 'Все') {
-      newPost = postData;
+    if (sortId === 'По алфавиту') {
+      newPost = postData.sort((a, b) => {
+        let aText = a.title.toLowerCase();
+        let bText = b.title.toLowerCase();
+        return aText < bText ? -1 : aText > bText ? 1 : 0;
+      });
       setPostData([...newPost]);
       return;
     }
@@ -76,6 +80,7 @@ const App = () => {
   function authIsTru(data) {
     setUserData(data.data);
     localStorage.setItem("", data.token);
+    console.log('token')
     localStorage.setItem("group-12", data.data.group);
     SetAutorization(true);
   }
@@ -98,10 +103,8 @@ const App = () => {
   /* console.log(userData); */
   useEffect(() => {
     if (!!autorozation) {
-      /* console.log('i work'); */
       api.getUserInfo().then((data) => setUserData(data));
     } else {
-      /* console.log('i not work'); */
     }
 
     if (autorozation) {
@@ -178,8 +181,6 @@ const App = () => {
     <>
       <AllContextData.Provider
         value={{
-          /* posts,
-          setPosts, */
           postData,
           changeStateLikedPost,
           deletePost,

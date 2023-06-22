@@ -9,6 +9,7 @@ import { IconButton } from '@mui/material';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { AllContextData } from '../../context/context';
 import { FormComment } from '../Form/FormComment';
+import { MailOutline } from '@mui/icons-material';
 
 export default function BasicModal({ urlpage, singlePost, setSinglePost }) {
   const user = React.useContext({ ...AllContextData });
@@ -41,8 +42,8 @@ export default function BasicModal({ urlpage, singlePost, setSinglePost }) {
         <Button
           variant="contained"
           onClick={handleOpen}
-          startIcon={<PostAddIcon />}
-        >Прислать</Button>
+          startIcon={<MailOutline />}
+        >{/* <PostAddIcon /> */}</Button>
         : user?.userData._id === singlePost?.author?._id ?
           <IconButton
             aria-label="Редакировать"

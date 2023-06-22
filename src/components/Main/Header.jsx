@@ -10,8 +10,7 @@ import BasicModal from "../Modal/modal";
 import CheckAvatar from "../../Utils/avatar";
 import TransitionsModal from "../Modal/transitModal";
 import s from './style.module.css';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import logo from '../img/logo.svg'
 
 export const Header = () => {
   /* const { theme, setTheme } = useContext(ThemeContext); */
@@ -26,7 +25,7 @@ export const Header = () => {
           position: "fixed",
           zIndex: 2,
           display: 'flex',
-          height: '80px',
+          height: '70px',
           backgroundColor: '#5fcdd9',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -35,14 +34,11 @@ export const Header = () => {
         }}
       >
         {<Link to="/">
-          <Button type="primary">
-            <SentimentVerySatisfiedIcon />
-            <EmojiEmotionsIcon />
-          </Button>
+          <Button className={s.logo}>
+            <img src={logo} height="50px" width="50px" /></Button>
         </Link>}
 
-        <Container maxWidth='xl'
-          sx={{}}>
+        <Container maxWidth='xl'>
           <div className="marquee-container">
             <span className="marquee">
               <pre>Журнал "Весёлые заметки"</pre>
@@ -63,7 +59,20 @@ export const Header = () => {
                   >
                     {CheckAvatar(userInfo)}
                   </Avatar>
-                } />
+                }
+                titleTypographyProps={{
+                  color: 'white',
+                }}
+                title={userInfo?.about}
+                subheaderTypographyProps={{
+                  color: 'whitesmoke',
+                }}
+                subheader={userInfo?.name}
+                onClick={() => setOpenUserModal(!onpenUserModal)}
+
+
+
+              />
 
               <Button type="primary">
                 <Login className="" onClick={() => logOut()} />
