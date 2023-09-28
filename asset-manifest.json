@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/8Lou/diplom-project-2023/static/css/main.10662df7.css",
-    "main.js": "/8Lou/diplom-project-2023/static/js/main.adfba08e.js",
-    "static/media/err.jpeg": "/8Lou/diplom-project-2023/static/media/err.b247ae53c959a2cfec82.jpeg",
-    "static/media/logo.svg": "/8Lou/diplom-project-2023/static/media/logo.fe2d03c51ac90e0ae63f83d19d4953e2.svg",
-    "index.html": "/8Lou/diplom-project-2023/index.html",
-    "main.10662df7.css.map": "/8Lou/diplom-project-2023/static/css/main.10662df7.css.map",
-    "main.adfba08e.js.map": "/8Lou/diplom-project-2023/static/js/main.adfba08e.js.map"
+    "main.css": "/diplom-project-2023/static/css/main.16b46b7b.css",
+    "main.js": "/diplom-project-2023/static/js/main.06fa9837.js",
+    "static/media/err.jpeg": "/diplom-project-2023/static/media/err.b247ae53c959a2cfec82.jpeg",
+    "static/media/logo.svg": "/diplom-project-2023/static/media/logo.fe2d03c51ac90e0ae63f83d19d4953e2.svg",
+    "index.html": "/diplom-project-2023/index.html",
+    "main.16b46b7b.css.map": "/diplom-project-2023/static/css/main.16b46b7b.css.map",
+    "main.06fa9837.js.map": "/diplom-project-2023/static/js/main.06fa9837.js.map"
   },
   "entrypoints": [
-    "static/css/main.10662df7.css",
-    "static/js/main.adfba08e.js"
+    "static/css/main.16b46b7b.css",
+    "static/js/main.06fa9837.js"
   ]
 }
